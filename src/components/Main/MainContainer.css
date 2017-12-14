@@ -1,0 +1,18 @@
+.MainContainer {
+
+  width: 95%;
+  background: rgb(131, 204, 94);
+  border-radius: 12px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  padding-top: 10px;
+  margin: 0 auto;
+  box-shadow: 10px 10px 5px rgb(56, 124, 7);
+  min-width: 1700px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  
+}
+
+

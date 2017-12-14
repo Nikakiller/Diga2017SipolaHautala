@@ -1,0 +1,31 @@
+{
+  "name": "forest-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.17.1",
+    "babel": "^6.23.0",
+    "bootstrap": "^3.3.7",
+    "component-directory-webpack-plugin": "^1.0.5",
+    "highcharts": "^6.0.3",
+    "imports-loader": "^0.7.1",
+    "jquery": "^3.2.1",
+    "pivotal-ui": "^11.0.0",
+    "react": "^16.2.0",
+    "react-auto-scale": "^1.0.4",
+    "react-bootstrap": "^0.31.5",
+    "react-dom": "^16.2.0",
+    "react-highcharts": "^15.0.0",
+    "react-scripts": "1.0.17"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "babel-loader": "^7.1.2",
+    "react-svg-loader": "^2.1.0"
+  }
+}

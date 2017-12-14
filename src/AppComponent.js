@@ -46,7 +46,7 @@ class AppComponent extends Component {
 
       values:[],
       ChartData:[{"data":[0.13],"type":"column","name":"Hakkuu"},{"data":[0.26],"type":"column","name":"Mustikkasato"},
-                {"data":[0.54],"type":"column","name":"Hiili"},{"data":[0.78],"type":"column","name":"Muut"}]
+                {"data":[0.54],"type":"column","name":"Hiili"},{"data":[0.78],"type":"column","name":"Keruutuotteet"}]
     };
 
     //Click handlers
@@ -248,7 +248,7 @@ class AppComponent extends Component {
              && this.state.values[i].indicatorId === this.state.IndicatorID){
             
             this.state.ChartData.push({data:[this.state.values[i].value],type:"column",name:this.state.IndicatorSelected});
-              
+
             break;
          }
      }

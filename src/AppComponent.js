@@ -5,6 +5,8 @@ import Defaults from "./components/defaults/Defaults";
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
 
+/*Testing*/
+
 class AppComponent extends Component {
 
   //Constructor

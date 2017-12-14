@@ -10,9 +10,12 @@ class GraphsContainerComponent extends Component {
   }
 
   render() {
+    
+    const {ChartData} = this.props;
+
     return (
       <div className="GraphsContainer">
-      <GraphComponent />
+      <GraphComponent ChartData={ChartData}/>
       </div>
     );
   }

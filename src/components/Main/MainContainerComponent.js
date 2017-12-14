@@ -13,6 +13,7 @@ class MainContainerComponent extends Component {
     const {
            RenderChart,
            ShowChartHeadings,
+           ChartData,
            AreaLevelSelectionClicked,AreaLevelData,AreaLevelSelected,
            AreaSelectionClicked,AreaSelected,AreaData,
            ScenarioSelectionClicked,ScenarioSelected,ScenarioData, 
@@ -83,7 +84,7 @@ class MainContainerComponent extends Component {
             <div className="GraphsContainer">
              
               {ChartDetails}
-              <GraphsContainerComponent RenderChart={RenderChart}/>    
+              <GraphsContainerComponent RenderChart={RenderChart} ChartData={ChartData}/>    
             </div>
           </div>
 

@@ -1,70 +1,76 @@
 
 import React, { Component } from 'react'
 const ReactHighcharts = require('react-highcharts'); 
+var HighchartsMore = require('highcharts-more');
+HighchartsMore(ReactHighcharts.Highcharts);
 
 
 class Graph extends Component {
    
     render () {
 
-    let config = {
-    chart: {
-        renderTo:"Graph",
-        polar: true,
-        width:500,
-        width:500
-    },
+    let config = {  
+        chart: {
+            polar: true,
+            type: 'column',
+            backgroundColor:"transparent",
+            width:500,
+            height:500,
+            marginTop:120
+        },
+    
+        title: {
+            text: ''
+        },
+    
+        subtitle: {
+            text: ''
+        },
+    
+        pane: {
+            size: '85%'
+        },
+    
+        legend: {
+            align: 'right',
+            verticalAlign: 'top',
+            y: 0,
+            layout: 'vertical',
+            floating:true,
+            margin:30
+        },
+    
+        xAxis: {
+            tickmarkPlacement: 'on'
+        },
+    
+        yAxis: {
+            min: 0,
+            endOnTick: false,
+            showLastLabel: true,
+            title: {
+                text: ''
+            },
+            labels: {
+                
+            },
+            reversedStacks: false
+        },
+    
+        tooltip: {
+            valueSuffix: '*'
+        },
 
-    title: {
-        text: 'Highcharts Polar Chart'
-    },
-
-    pane: {
-        startAngle: 0,
-        endAngle: 360
-    },
-
-    xAxis: {
-        tickInterval: 45,
-        min: 0,
-        max: 360,
-        labels: {
-            formatter: function () {
-                return this.value + '°';
+        series: this.props.ChartData,
+    
+        plotOptions: {
+            series: {
+                stacking: 'normal',
+                shadow: false,
+                groupPadding: 0,
+                pointPlacement: 'on'
             }
         }
-    },
-
-    yAxis: {
-        min: 0
-    },
-
-    plotOptions: {
-        series: {
-            pointStart: 0,
-            pointInterval: 45
-        },
-        column: {
-            pointPadding: 0,
-            groupPadding: 0
-        }
-    },
-
-    series: [{
-        type: 'column',
-        name: 'Column',
-        data: [8, 7, 6, 5, 4, 3, 2, 1],
-        pointPlacement: 'between'
-    }, {
-        type: 'line',
-        name: 'Line',
-        data: [1, 2, 3, 4, 5, 6, 7, 8]
-    }, {
-        type: 'area',
-        name: 'Area',
-        data: [1, 8, 2, 7, 3, 6, 4, 5]
-    }]
-        
     };
         
         return (

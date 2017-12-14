@@ -23,9 +23,11 @@
 
 /*Main content in the columns*/
 .ScenarioContainer {
-  display: inline-block;; 
+  position: absolute; 
+  top:20px;
+  left:70px;
+  right:0;
   width: 400px;
-  height: 800px;
 }
 
 .GraphsContainer {
@@ -147,6 +149,12 @@ ul.dropdown-menu {
       -o-box-shadow: inset 2px 2px 12px -1px #237A2E,5px 5px 5px -1px #1D8519;
   
       background: rgb(117, 185, 117);
+  }
+
+  .Graph{
+
+    margin-top: 60px;
+
   }
 
 

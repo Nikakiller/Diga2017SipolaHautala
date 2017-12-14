@@ -14,7 +14,7 @@ ItemSingleBasicChoise extends Component {
 
     setItemState(){
         
-                this.props.MultiChoiseItemClicked(this.props.CallingID,this.props.id);
+                this.props.MultiChoiseItemClicked(this.props.CallingID,this.props.id,this.props.name);
 
                 if(this.props.name!==Defaults.DataNotAvailable){
 

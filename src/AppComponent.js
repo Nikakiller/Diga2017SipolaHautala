@@ -39,11 +39,14 @@ class AppComponent extends Component {
       TimePeriodID:"",
       IndicatorID:"",
       ScenarioID:"",
+      IndicatorSelected: "",
 
-      RenderChart:false,
+      RenderChart:true,
       ShowChartHeadings:true,
 
       values:[],
+      ChartData:[{"data":[0.13],"type":"column","name":"Hakkuu"},{"data":[0.26],"type":"column","name":"Mustikkasato"},
+                {"data":[0.54],"type":"column","name":"Hiili"},{"data":[0.78],"type":"column","name":"Muut"}]
     };
 
     //Click handlers
@@ -69,7 +72,7 @@ class AppComponent extends Component {
 
   componentDidUpdate(){
 
-     if(this.state.IndicatorID!="" && this.state.TimePeriodID !="" && this.state.ScenarioID !=""){
+     if(this.state.IndicatorID!=="" && this.state.TimePeriodID !=="" && this.state.ScenarioID !=""){
         this.searchValuesFromData();
      }
   }
@@ -198,7 +201,9 @@ class AppComponent extends Component {
     this.setState({timePeriodSelected:TimePeriod, TimePeriodID:ID});  
   }
 
-  MultiChoiseItemClicked(CallingID, ID){
+  MultiChoiseItemClicked(CallingID, ID, Name){
+
+      this.setState({IndicatorSelected:Name});
 
       switch(CallingID){
         case Defaults.ScenariosSelectionID:{
@@ -241,7 +246,9 @@ class AppComponent extends Component {
           if(this.state.values[i].timePeriodId === this.state.TimePeriodID
              && this.state.values[i].scenarioId === this.state.ScenarioID
              && this.state.values[i].indicatorId === this.state.IndicatorID){
-            console.log(this.state.values[i].value);
+            
+            this.state.ChartData.push({data:[this.state.values[i].value],type:"column",name:this.state.IndicatorSelected});
+              
             break;
          }
      }
@@ -255,6 +262,7 @@ class AppComponent extends Component {
 
           RenderChart = {this.state.RenderChart}
           ShowChartHeadings = {this.state.ShowChartHeadings}
+          ChartData = {this.state.ChartData}
 
           AreaLevelSelectionClicked={this.AreaLevelSelectionClicked}
           AreaLevelData={this.state.areaLevelData}

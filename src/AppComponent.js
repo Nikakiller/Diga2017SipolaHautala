@@ -5,8 +5,6 @@ import Defaults from "./components/defaults/Defaults";
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
 
-/*Testing*/
-
 class AppComponent extends Component {
 
   //Constructor
@@ -15,21 +13,13 @@ class AppComponent extends Component {
 
     this.state = {
 
-      areaLevelData: [],
-      areaLevelSelected: "Valitse aluetaso",
+      //Dropdown menu data
+      AreaLevelValues:[{areaLevelData:[]},{areaLevelSelected:"Valitse aluetaso"}],
+      AreaDataValues:[{areaData:[]},{areaSelected:"Valitse alue"},{selectedAreaID:""}],
+      ScenarioDataValues:[{scenarioData:[]},{scenarioSelected:"Valitse skenaario"},{scenarioID:""}],
+      TimePeriodDataValues:[{timeData:[]},{timePeriodSelected:"Valitse ajankohta"}],
 
-      areaData: [],
-      areaSelected: "Valitse alue",
-
-      selectedAreaID:"",
-      scenarioData : [],
-
-      scenarioSelected:"Valitse skenaario",
-      selectedScenarioID:"",
-
-      timeData:[],
-      timePeriodSelected:"Valitse ajankohta",
-
+      //All the indicators
       scenariosData:[{id:0,name:Defaults.DataNotAvailable}],
       indicatorsDataTreeProduction:[{id:0,name:Defaults.DataNotAvailable}],
       indicatorsDataCollectionsProducts:[{id:0,name:Defaults.DataNotAvailable}],
@@ -43,12 +33,15 @@ class AppComponent extends Component {
       ScenarioID:"",
       IndicatorSelected: "",
 
+      //Chart options
       RenderChart:true,
       ShowChartHeadings:true,
+      TickInterval:36,
 
+      //All selection values and chart related data
       values:[],
-      ChartData:[{"data":[0.13],"type":"column","name":"Hakkuu"},{"data":[0.26],"type":"column","name":"Mustikkasato"},
-                {"data":[0.54],"type":"column","name":"Hiili"},{"data":[0.78],"type":"column","name":"Keruutuotteet"}]
+      ChartDataValues:[{ChartData:[]},{ChartDataID:[]}]
+
     };
 
     //Click handlers
@@ -61,11 +54,12 @@ class AppComponent extends Component {
 
   //Lifecycle methods
   componentDidMount() {
-    
     //Setting up the initial data and selections
     DataHandler.getAreaLevelData()
       .then(areaLevelData => {
-        this.setState({ areaLevelData: areaLevelData});
+        const Data = this.state.AreaLevelValues;
+        Data[0].areaLevelData = areaLevelData;
+        this.setState({AreaLevelValues:Data});
       })
       .catch(error => {
         console.log("Failed", error);
@@ -74,19 +68,14 @@ class AppComponent extends Component {
 
   componentDidUpdate(){
 
-     if(this.state.IndicatorID!=="" && this.state.TimePeriodID !=="" && this.state.ScenarioID !=""){
-        this.searchValuesFromData();
-     }
+     //Checking when component updates that is it time to render the chart
+      if(this.state.ScenarioID !=="" && this.state.TimePeriodID!=="" && this.state.IndicatorID!==""){
+        this.chartDataHandler();
+      }
   }
 
   //Setting data not found fields
   setAllDataNotFound(){
-
-      /*this.state.indicatorsDataCollectionsProducts[0] = {id:0, name: Defaults.DataNotAvailable};
-      this.state.indicatorsDataDiversity[0] = {id:1,name:Defaults.DataNotAvailable};
-      this.state.indicatorsDataCarbon [0]= {id:2, name: Defaults.DataNotAvailable};
-      this.state.indicatorsDataOthers [0]= {id:3, name: Defaults.DataNotAvailable};*/
-
       this.setState({
       indicatorsDataTreeProduction:[],
       indicatorsDataCarbon:[],
@@ -98,24 +87,26 @@ class AppComponent extends Component {
   //Function AreLevelSelectionClicked
   AreaLevelSelectionClicked(AreaLevel) {
 
-    this.setState({areaLevelSelected:AreaLevel.name});
+    const Data = this.state.AreaLevelValues;
+    Data[1].areaLevelSelected = AreaLevel.name;
+    this.setState({AreaLevelValues: Data});
 
     if(AreaLevel.name===Defaults.AreaLevelOneName){
-
       DataHandler.getAreaData(Defaults.AreaLevelOneID)
       .then(areaData => {
-        this.setState({ areaData: areaData });
+        const Data = this.state.AreaDataValues;
+        Data[0].areaData = areaData;
+        this.setState({AreaDataValues:Data});
       })
       .catch(error => {
         console.log("Failed", error);
       });
-    } 
-    
-    else{
-  
+    }   else{
       DataHandler.getAreaData(Defaults.AreaLevelTwoID)
       .then(areaData => {
-        this.setState({ areaData: areaData });
+        const Data = this.state.AreaDataValues;
+        Data[0].areaData = areaData;
+        this.setState({AreaDataValues:Data});
       })
       .catch(error => {
         console.log("Failed", error);
@@ -126,73 +117,77 @@ class AppComponent extends Component {
 
   //Function AreaSelectionClicked
   AreaSelectionClicked(Area){
+    for(var i =0; i < this.state.AreaDataValues[0].areaData.length;i++){
+        if(this.state.AreaDataValues[0].areaData[i].name===Area.name){
 
-    for(var i =0; i < this.state.areaData.length;i++){
+            let Data = this.state.AreaDataValues;
+            let Scenario = this.state.ScenarioDataValues;
 
-        if(this.state.areaData[i].name===Area.name){
-            this.setState({scenarioData:this.state.areaData[i].scenarioCollections,areaSelected:Area.name,
-            selectedAreaID:this.state.areaData[i].id });
+            Data[1].areaSelected = Area.name;
+            Data[2].selectedAreaID = this.state.AreaDataValues[0].areaData[i].id;
+            Scenario[0].scenarioData = this.state.AreaDataValues[0].areaData[i].scenarioCollections;
+            console.log("Scenario: ",Scenario[0].scenarioData.length);
+            this.setState({ScenarioDataValues: Scenario,AreaDataValues:Data});
        }
     }
   }
 
   //Function ScenarioSelectionClicked
-  ScenarioSelectionClicked(Scenario){
-    
-   this.setAllDataNotFound()
+  ScenarioSelectionClicked(Scenario,ID){
+  
+  console.log("Scenario: ", ID);
+   this.setAllDataNotFound();
 
     var ScenarioId = null;
     var AreaDataId = null;
 
-    this.setState({scenarioSelected:Scenario.name});
-
-    for(var i=0; i < this.state.areaData.length;i++){
-      
-          if(this.state.areaSelected===this.state.areaData[i].name){
-      
-               for(var l=0; l < this.state.areaData[i].scenarioCollections.length;l++){
-      
-                 if(Scenario.name===this.state.areaData[i].scenarioCollections[l].name){
-                                
-                         ScenarioId = this.state.areaData[i].scenarioCollections[l].id;
-                         AreaDataId = this.state.areaData[i].id;
+      for(var i=0; i < this.state.AreaDataValues[0].areaData.length;i++){
+          if(this.state.AreaDataValues[1].areaSelected===this.state.AreaDataValues[0].areaData[i].name){
+               for(var l=0; l < this.state.AreaDataValues[0].areaData[i].scenarioCollections.length;l++){
+                 if(Scenario.name===this.state.AreaDataValues[0].areaData[i].scenarioCollections[l].name){        
+                         ScenarioId = this.state.AreaDataValues[0].areaData[i].scenarioCollections[l].id;
+                         AreaDataId = this.state.AreaDataValues[0].areaData[i].id;
+                         console.log(ScenarioId);
                          break;
                      }
                  }                        
-             }
-        }  
+            }
+        }
 
           DataHandler.getScenarioAndIndicatorData(ScenarioId,AreaDataId).then(allData => {
-
-            console.log(allData);
-
             if(allData[0].values.length >0){
 
-              for(var i = 0; i < allData[0].indicatorCategories.length;i++){
+              let sum = 0;
+              let Tick = 0;
+              let Time = this.state.TimePeriodDataValues;
 
+              for(var i = 0; i < allData[0].indicatorCategories.length;i++){
               if(allData[0].indicatorCategories[i].name===Defaults.TreeProduction){         
                  this.setState({indicatorsDataTreeProduction:allData[0].indicatorCategories[i].indicators});
+                 sum = sum + allData[0].indicatorCategories[i].indicators.length;
               } 
-
               if(allData[0].indicatorCategories[i].name===Defaults.Diversity){       
               this.setState({indicatorsDataDiversity:allData[0].indicatorCategories[i].indicators});
+              sum = sum + allData[0].indicatorCategories[i].indicators.length;
               }
-
               if(allData[0].indicatorCategories[i].name===Defaults.CollectionProducts){  
               this.setState({indicatorsDataCollectionsProducts:allData[0].indicatorCategories[i].indicators});
+              sum = sum + allData[0].indicatorCategories[i].indicators.length;
               }
-
               if(allData[0].indicatorCategories[i].name===Defaults.Carbon){             
               this.setState({indicatorsDataCarbon:allData[0].indicatorCategories[i].indicators});
+              sum = sum + allData[0].indicatorCategories[i].indicators.length;
               }
-              
               if(allData[0].indicatorCategories[i].name===Defaults.Others){             
                 this.setState({indicatorsDataOthers:allData[0].indicatorCategories[i].indicators});
+                sum = sum + allData[0].indicatorCategories[i].indicators.length;
               }
           }
-             this.setState({scenariosData: allData[0].scenarios,timeData:allData[0].timePeriods,values:allData[0].values});
+              Tick = 360/sum;
+              Time[0].timeData = allData[0].timePeriods;
+              this.setState({scenariosData: allData[0].scenarios,TimePeriodDataValues:Time,values:allData[0].values,
+              scenarioSelected:Scenario.name,TickInterval:Tick});
           }
-  
           }).catch(error => {
           console.log("Failed", error);
         });
@@ -200,14 +195,13 @@ class AppComponent extends Component {
 
   //Function TimePeriodSelectionClicked
   TimePeriodSelectionClicked(TimePeriod, ID){
-    this.setState({timePeriodSelected:TimePeriod, TimePeriodID:ID});  
+    let Time = this.state.TimePeriodDataValues;
+    Time[1].timePeriodSelected = TimePeriod;
+    this.setState({TimePeriodDataValues:Time, TimePeriodID:ID});  
   }
 
   MultiChoiseItemClicked(CallingID, ID, Name){
-
-      this.setState({IndicatorSelected:Name});
-
-      switch(CallingID){
+        switch(CallingID){
         case Defaults.ScenariosSelectionID:{
           console.log("Calling ID Scenario: ", ID);
           this.setState({ScenarioID:ID});
@@ -215,7 +209,7 @@ class AppComponent extends Component {
         }
         case Defaults.TreeID:{
           console.log("Calling ID Tree: ", ID);
-          this.setState({IndicatorID:ID});
+          this.setState({IndicatorID:ID,IndicatorSelected:Name});
           break;
         }
         case Defaults.DiversityID:{
@@ -238,20 +232,51 @@ class AppComponent extends Component {
           this.setState({Indicator:ID});
           break;
         }
-      }
-  }
 
-  searchValuesFromData(){
+      default:{
+          console.log("Default case");
+        }
+      }
+
+    }
+      
+  chartDataHandler(){
+
+    let addNewIndicator = true;
 
     for(var i=0; i < this.state.values.length;i++){
 
           if(this.state.values[i].timePeriodId === this.state.TimePeriodID
              && this.state.values[i].scenarioId === this.state.ScenarioID
              && this.state.values[i].indicatorId === this.state.IndicatorID){
-            
-            this.state.ChartData.push({data:[this.state.values[i].value],type:"column",name:this.state.IndicatorSelected});
 
-            break;
+              if(this.state.ChartDataValues[1].ChartDataID.length===0){  
+
+              this.state.ChartDataValues[0].ChartData.push(this.state.values[i].value);
+              this.state.ChartDataValues[1].ChartDataID.push(this.state.IndicatorID);
+              this.setState({IndicatorID:""});
+              break;
+
+              } else {
+
+                for(var l=0; l < this.state.ChartDataValues[1].ChartDataID.length;l++){
+
+                  if(this.state.IndicatorID === this.state.ChartDataValues[1].ChartDataID[l]){
+
+                        this.state.ChartDataValues[1].ChartDataID.splice(l, 1);
+                        this.state.ChartDataValues[0].ChartData.splice(l,1);
+                        this.setState({IndicatorID:""});
+                        addNewIndicator = false;
+                        break;
+                  } 
+                }
+                       if(addNewIndicator){
+                        this.state.ChartDataValues[0].ChartData.push(this.state.values[i].value);
+                        this.state.ChartDataValues[1].ChartDataID.push(this.state.IndicatorID);
+                        this.setState({IndicatorID:""});
+                        break;
+                       }
+              }
          }
      }
   }
@@ -264,26 +289,23 @@ class AppComponent extends Component {
 
           RenderChart = {this.state.RenderChart}
           ShowChartHeadings = {this.state.ShowChartHeadings}
-          ChartData = {this.state.ChartData}
+          ChartDataValues = {this.state.ChartDataValues}
+          TickInterval = {this.state.TickInterval}
 
+          AreaLevelValues = {this.state.AreaLevelValues}
           AreaLevelSelectionClicked={this.AreaLevelSelectionClicked}
-          AreaLevelData={this.state.areaLevelData}
-          AreaLevelSelected = {this.state.areaLevelSelected}
-
-          AreaData = {this.state.areaData}
+     
+          AreaDataValues = {this.state.AreaDataValues}
           AreaSelectionClicked = {this.AreaSelectionClicked}
-          AreaSelected ={this.state.areaSelected}
-          
-          ScenarioData = {this.state.scenarioData}
+       
+          ScenarioDataValues = {this.state.ScenarioDataValues}
           ScenarioSelectionClicked = {this.ScenarioSelectionClicked}
-          ScenarioSelected = {this.state.scenarioSelected}
-          
+        
           ScenariosData = {this.state.scenariosData}
       
-          TimePeriodsData = {this.state.timeData}
+          TimePeriodDataValues = {this.state.TimePeriodDataValues}
           TimePeriodSelectionClicked = {this.TimePeriodSelectionClicked}
-          TimePeriodSelected ={this.state.timePeriodSelected}
-
+        
           IndicatorsDataTreeProduction = {this.state.indicatorsDataTreeProduction}
           IndicatorsDataCollectionProducts = {this.state.indicatorsDataCollectionsProducts}
           IndicatorsDataDiversity = {this.state.indicatorsDataDiversity}

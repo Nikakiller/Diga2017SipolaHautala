@@ -11,11 +11,11 @@ class GraphsContainerComponent extends Component {
 
   render() {
     
-    const {ChartData} = this.props;
+    const {ChartDataValues,TickInterval} = this.props;
 
     return (
       <div className="GraphsContainer">
-      <GraphComponent ChartData={ChartData}/>
+      <GraphComponent ChartDataValues={ChartDataValues} TickInterval={TickInterval}/>
       </div>
     );
   }

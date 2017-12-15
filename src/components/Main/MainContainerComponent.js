@@ -13,12 +13,14 @@ class MainContainerComponent extends Component {
     const {
            RenderChart,
            ShowChartHeadings,
-           ChartData,
-           AreaLevelSelectionClicked,AreaLevelData,AreaLevelSelected,
-           AreaSelectionClicked,AreaSelected,AreaData,
-           ScenarioSelectionClicked,ScenarioSelected,ScenarioData, 
+           ChartDataValues,
+           TickInterval,
+
+           AreaLevelValues,AreaLevelSelectionClicked,
+           AreaDataValues,AreaSelectionClicked,
+           ScenarioDataValues,ScenarioSelectionClicked,
            ScenariosData,
-           TimePeriodsData, TimePeriodSelected,TimePeriodSelectionClicked,
+           TimePeriodDataValues,TimePeriodSelectionClicked,
            IndicatorsDataTreeProduction,
            IndicatorsDataCollectionProducts,IndicatorsDataDiversity,
            IndicatorsDataCarbon,IndicatorsDataOthers,
@@ -29,9 +31,9 @@ class MainContainerComponent extends Component {
              ChartDetails =     
              (  
               <div>
-               <HeadingComponent Title={AreaSelected}/>
-               <HeadingComponent Title={ScenarioSelected}/>
-               <HeadingComponent Title={TimePeriodSelected} />
+               <HeadingComponent Title={AreaLevelValues[1].areaSelected}/>
+               <HeadingComponent Title={ScenarioDataValues[1].scenarioSelected}/>
+               <HeadingComponent Title={TimePeriodDataValues[1].timePeriodSelected} />
                </div>
              ) 
           }
@@ -49,28 +51,31 @@ class MainContainerComponent extends Component {
 
             <HeadingComponent   Title="Aluetaso" />
             <DropdownComponent  ItemSelectionClicked = {AreaLevelSelectionClicked}
-                                DataArray = {AreaLevelData}
-                                ItemSelected = {AreaLevelSelected}
-                                CreateTimeDropdown={false}/>
+                                DataArray = {AreaLevelValues[0].areaLevelData}
+                                ItemSelected = {AreaLevelValues[1].areaLevelSelected}
+                                CreateTimeDropdown={false}
+                                />
 
             <HeadingComponent   Title="Alue"/>
-            <DropdownComponent  DataArray = {AreaData} 
+            <DropdownComponent  DataArray = {AreaDataValues[0].areaData} 
                                 ItemSelectionClicked = {AreaSelectionClicked}
-                                ItemSelected = {AreaSelected}
+                                ItemSelected = {AreaDataValues[1].areaSelected}
                                 CreateTimeDropdown={false}/>
 
             <HeadingComponent  Title="Skenaariokokoelma"/>
-            <DropdownComponent  DataArray={ScenarioData} 
-                                ItemSelected={ScenarioSelected}
+            <DropdownComponent  DataArray={ScenarioDataValues[0].scenarioData} 
+                                ItemSelected={ScenarioDataValues[1].scenarioSelected}
                                 ItemSelectionClicked={ScenarioSelectionClicked}
-                                CreateTimeDropdown={false}/>
+                                CreateTimeDropdown={false}
+                                />
     
           <div className="TimeScenarios">
             <HeadingComponent Title="Ajankohta" />
-            <DropdownComponent DataArray = {TimePeriodsData}
-                               ItemSelected = {TimePeriodSelected}
+            <DropdownComponent DataArray = {TimePeriodDataValues[0].timeData}
+                               ItemSelected = {TimePeriodDataValues[1].timePeriodSelected}
                                ItemSelectionClicked = {TimePeriodSelectionClicked}
-                               CreateTimeDropdown={true}/>
+                               CreateTimeDropdown={true}
+                               />
     
             <HeadingComponent  Title="Skenaariot"/>
             <MultiChoiseComponent ChoiseData = {ScenariosData}
@@ -84,7 +89,8 @@ class MainContainerComponent extends Component {
             <div className="GraphsContainer">
              
               {ChartDetails}
-              <GraphsContainerComponent RenderChart={RenderChart} ChartData={ChartData}/>    
+              <GraphsContainerComponent RenderChart={RenderChart} ChartDataValues={ChartDataValues}
+                                        TickInterval={TickInterval}/>    
             </div>
           </div>
 

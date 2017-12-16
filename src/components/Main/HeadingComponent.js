@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 class HeadingComponentH4 extends Component {
     render () {
 
-        const{Title} = this.props;
+        const{Title,DisplayH3} = this.props;
         let heading = null;
 
         if(Title === "METSÄMITTARI"){
@@ -16,7 +16,11 @@ class HeadingComponentH4 extends Component {
             heading = (<div><h3 className="h3">{Title}</h3></div>)
         }
         else{
-            heading = (<div><h4 className="h4">{Title}</h4></div>)
+            if(DisplayH3){
+            heading = (<div className="Chart h3"><h3 className="h3">{Title}</h3></div>)
+            } else{
+                heading = (<div><h4 className="h4">{Title}</h4></div>)
+            }
         }
         return (    
             <div className="Headings">

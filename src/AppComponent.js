@@ -81,11 +81,11 @@ class AppComponent extends Component {
   //Setting data not found fields
   setAllDataNotFound(){
       this.setState({
-      indicatorsDataTreeProduction:[],
-      indicatorsDataCarbon:[],
-      indicatorsDataCollectionsProducts:[],
-      indicatorsDataDiversity:[],
-      indicatorsDataOthers:[]});
+      indicatorsDataTreeProduction:[{id:0,name:Defaults.DataNotAvailable}],
+      indicatorsDataCarbon:[{id:1,name:Defaults.DataNotAvailable}],
+      indicatorsDataCollectionsProducts:[{id:2,name:Defaults.DataNotAvailable}],
+      indicatorsDataDiversity:[{id:3,name:Defaults.DataNotAvailable}],
+      indicatorsDataOthers:[{id:4,name:Defaults.DataNotAvailable}]});
   }
 
   //Function AreLevelSelectionClicked

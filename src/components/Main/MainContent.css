@@ -111,6 +111,10 @@ ul.dropdown-menu {
   margin-top:23px;
 }
 
+.Chart h3{
+  margin-top:35px;
+}
+
 .TimeScenarios{
   margin-top: 90px;
 }
@@ -156,7 +160,7 @@ ul.dropdown-menu {
 
   .Graph{
 
-    margin-top: 60px;
+    margin-top: 20px;
 
   }
 

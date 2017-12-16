@@ -114,10 +114,15 @@ ul.dropdown-menu {
 .Chart h3{
   margin-top:35px;
 }
+
 .TypeContainer{
 
-  width:130px;
-  margin-left: 410px;
+  width:250px;
+  margin-left: 330px;
+}
+.nav-pills active{
+
+  background: #1D8519 !important;
 }
 
 .TimeScenarios{

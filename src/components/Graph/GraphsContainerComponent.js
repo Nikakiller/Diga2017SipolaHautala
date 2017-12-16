@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import GraphComponent from "../Graph/GraphComponent";
+import SelectChartType from "../Graph/SelectChartType";
 
 class GraphsContainerComponent extends Component {
 
@@ -16,6 +17,7 @@ class GraphsContainerComponent extends Component {
     return (
       <div className="GraphsContainer">
       <GraphComponent ChartDataValues={ChartDataValues} TickInterval={TickInterval}/>
+      <SelectChartType />
       </div>
     );
   }

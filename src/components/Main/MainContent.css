@@ -33,7 +33,7 @@
 .GraphsContainer {
   display: inline-block;; 
   width: 552px;
-  height: 800px;
+  height: 850px;
 }
 
 .IndicatorContainer {
@@ -113,6 +113,11 @@ ul.dropdown-menu {
 
 .Chart h3{
   margin-top:35px;
+}
+.TypeContainer{
+
+  width:130px;
+  margin-left: 410px;
 }
 
 .TimeScenarios{

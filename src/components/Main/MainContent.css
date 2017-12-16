@@ -25,14 +25,14 @@
 .ScenarioContainer {
   position: absolute; 
   top:20px;
-  left:70px;
+  left:96px;
   right:0;
-  width: 400px;
+  width: 350px;
 }
 
 .GraphsContainer {
   display: inline-block;; 
-  width: 500px;
+  width: 552px;
   height: 800px;
 }
 
@@ -40,9 +40,9 @@
 
   position: absolute; 
   top:20px;
-  left:70px;
+  left:96px;
   right:0;
-  width: 400px;
+  width: 350px;
 }
 
 .TimePeriodsContainer{
@@ -72,7 +72,7 @@ ul.dropdown-menu {
 }
 
 .dropdown-menu a{
-  color: black;
+  color: #000000;
   padding: 12px 16px;
   text-decoration: none !important;
   display: block;  
@@ -80,10 +80,12 @@ ul.dropdown-menu {
 
 .btn-lg{
   width: 310px;
+  color: #000000;
 }
 
 .dropdown-toggle{
   width: 35px;
+  color: #000000;
 }
 
 .btn {
@@ -91,6 +93,7 @@ ul.dropdown-menu {
   -webkit-box-shadow: 5px 5px 5px -1px #1D8519;
   -moz-box-shadow: 5px 5px 5px -1px #1D8519;
   -o-box-shadow: 5px 5px 5px -1px #1D8519;
+  color:#333!important;
 }
 
 .Headings h4{

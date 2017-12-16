@@ -31,7 +31,7 @@ class MainContainerComponent extends Component {
              ChartDetails =     
              (  
               <div>
-               <HeadingComponent Title={AreaLevelValues[1].areaSelected}/>
+               <HeadingComponent Title={AreaDataValues[1].areaSelected}/>
                <HeadingComponent Title={ScenarioDataValues[1].scenarioSelected}/>
                <HeadingComponent Title={TimePeriodDataValues[1].timePeriodSelected} />
                </div>

@@ -30,11 +30,20 @@
   width: 350px;
 }
 
+.AreaLevelContainer{
+
+  margin-top:40px;
+}
+
+.IndicatorLevelContainer{
+  
+    margin-top:40px;
+  }
+
 .GraphsContainer {
   display: inline-block;; 
-  width: 450px;
+  width: 510px;
   height: 800px;
-  margin-top:0px;
 }
 
 .IndicatorContainer {
@@ -106,15 +115,15 @@ ul.dropdown-menu {
   margin-top:23px;
 }
 
-.Chart h3{
-  margin-top:35px;
+.Chart h3 {
+  margin-top: 15px;
 }
 
 .TypeContainer{
 
   position: absolute; 
-  top:665px;
-  left:370px;
+  top:675px;
+  left:350px;
   right:0;
   width: 200px;
 
@@ -122,9 +131,14 @@ ul.dropdown-menu {
 
 .nav-pills li {
   margin-top: 5px;
-  background-color: #3ea834 !important;
+  background-color: #70be67 !important;
   border-radius: 5px;
-  margin-right: 5px;
+  margin-right: 15px;
+
+  box-shadow: 5px 5px 5px -1px #1D8519;
+  -webkit-box-shadow: 5px 5px 5px -1px #1D8519;
+  -moz-box-shadow: 5px 5px 5px -1px #1D8519;
+  -o-box-shadow: 5px 5px 5px -1px #1D8519;
 }
 
 .nav-pills li a {
@@ -133,6 +147,9 @@ ul.dropdown-menu {
 }
 .nav-pills > .active > a, .nav-pills > .active > a:hover {
   background-color: rgb(40, 134, 66)!important;
+  color: #000000 !important;
+  border: solid 1px rgb(2, 90, 2);
+  border-radius: 5px;
 }
 
 .nav-pills li a:hover {
@@ -141,7 +158,7 @@ ul.dropdown-menu {
 }
 
 .TimeScenarios{
-  margin-top: 90px;
+  margin-top: 95px;
 }
 
 .SingleItemDefault{
@@ -184,7 +201,7 @@ ul.dropdown-menu {
   }
 
   .Graph{
-    margin-top: 40px;
+    margin-top: 50px;
   }
 
 

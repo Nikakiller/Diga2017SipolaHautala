@@ -51,6 +51,7 @@ class MainContainerComponent extends Component {
           
             <HeadingComponent   Title="Skenaarioiden valinta"/>
 
+            <div className="AreaLevelContainer">
             <HeadingComponent   Title="Aluetaso" />
             <DropdownComponent  ItemSelectionClicked = {AreaLevelSelectionClicked}
                                 DataArray = {AreaLevelValues[0].areaLevelData}
@@ -70,6 +71,7 @@ class MainContainerComponent extends Component {
                                 ItemSelectionClicked={ScenarioSelectionClicked}
                                 CreateTimeDropdown={false}
                                 />
+            </div>
     
           <div className="TimeScenarios">
             <HeadingComponent Title="Ajankohta" />
@@ -101,6 +103,7 @@ class MainContainerComponent extends Component {
             <div className="IndicatorContainer">
             <HeadingComponent Title="Indikaattoreiden valinta"/>
 
+          <div className="IndicatorLevelContainer">
               <HeadingComponent Title="Puutuotanto*" />
               <MultiChoiseComponent ChoiseData = {IndicatorsDataTreeProduction}
                                     MultiChoiseItemClicked={MultiChoiseItemClicked}
@@ -125,6 +128,8 @@ class MainContainerComponent extends Component {
               <MultiChoiseComponent ChoiseData = {IndicatorsDataOthers}
                                     MultiChoiseItemClicked={MultiChoiseItemClicked}
                                     CallingID={Defaults.OthersID} />
+
+            </div>
                                     
            </div> 
           </div>

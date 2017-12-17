@@ -6,14 +6,14 @@ function getPolarConfig(ChartDataValues,tickInterval){
         chart: {
             polar: true,
             backgroundColor:"transparent",
-            height:450,
-            width:450,
+            height:510,
+            width:510,
             plotBorderWidth: null,
-            margin: [0, 0, 0, 0],
+            margin: [10, 10, 10, 10],
             spacingTop: 0,
             spacingBottom: 0,
             spacingLeft: 0,
-            spacingRight: 0
+            spacingRight: 0,
         },
         
         title: {
@@ -73,6 +73,15 @@ function getPolarConfig(ChartDataValues,tickInterval){
             },
         },
         
+        legend: {
+            enabled: true,
+            floating: true,
+            verticalAlign: 'top',
+            align:'right',
+            y:0,
+            margin:60
+        },
+
         series: [{
             innerSize: '30%',
             animation: {
@@ -83,7 +92,7 @@ function getPolarConfig(ChartDataValues,tickInterval){
             data: data,
             pointPlacement: 'between',
             color:"#04B431"
-        }] 
+        }]
 
     };
 
@@ -99,8 +108,8 @@ function getPolarConfig(ChartDataValues,tickInterval){
             chart: {
                 type: 'column',
                 backgroundColor:"transparent",
-                width: 450,
-                height:450,
+                width: 510,
+                height:510
             },
             title: {
                 text: ''

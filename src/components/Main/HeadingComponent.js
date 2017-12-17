@@ -17,7 +17,7 @@ class HeadingComponentH4 extends Component {
         }
         else{
             if(DisplayH3){
-            heading = (<div className="Chart h3"><h3 className="h3">{Title}</h3></div>)
+            heading = (<div><h3 className="Chart h3">{Title}</h3></div>)
             } else{
                 heading = (<div><h4 className="h4">{Title}</h4></div>)
             }

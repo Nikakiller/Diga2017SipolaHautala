@@ -207,7 +207,8 @@ class AppComponent extends Component {
   TimePeriodSelectionClicked(TimePeriod, ID){
     let Time = this.state.TimePeriodDataValues;
     Time[1].timePeriodSelected = TimePeriod;
-    this.setState({TimePeriodDataValues:Time, TimePeriodID:ID});  
+    this.setState({TimePeriodDataValues:Time, TimePeriodID:ID});
+    this.state.ChartDataValues[0].ChartData = [];  
   }
 
   MultiChoiseItemClicked(CallingID, ID, Name){
@@ -217,7 +218,7 @@ class AppComponent extends Component {
         switch(CallingID){
         case Defaults.ScenariosSelectionID:{
           console.log("Calling ID Scenario: ", ID);
-          this.state.ChartDataValues[0].ChartData = [];
+          //this.state.ChartDataValues[0].ChartData = [];
           this.setState({ScenarioID:ID});
           break;
         }
@@ -299,14 +300,10 @@ class AppComponent extends Component {
      }
   }
 
-  ChangeChartType(){
+  ChangeChartType(Type){
 
-    if(this.state.ChartType){
-      this.setState({ChartType:false})
-    } else{
+    this.setState({ChartType:Type});
 
-      this.setState({ChartType: true});
-    }
   }
 
   //Render

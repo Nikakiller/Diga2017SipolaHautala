@@ -18,7 +18,7 @@ class ChartTypeComponent extends Component {
             this.state.ColumnView="";
         }
         
-        this.props.ChangeChartType()
+        this.props.ChangeChartType(true)
     }
 
     ColumnViewClicked(){
@@ -29,7 +29,7 @@ class ChartTypeComponent extends Component {
             this.state.PolarView="";
         }
 
-        this.props.ChangeChartType()
+        this.props.ChangeChartType(false)
     }
 
     render () {

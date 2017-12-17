@@ -15,6 +15,8 @@ class MainContainerComponent extends Component {
            ShowChartHeadings,
            ChartDataValues,
            TickInterval,
+           ChangeChartType,
+           ChartType,
 
            AreaLevelValues,AreaLevelSelectionClicked,
            AreaDataValues,AreaSelectionClicked,
@@ -90,7 +92,8 @@ class MainContainerComponent extends Component {
              
               {ChartDetails}
               <GraphsContainerComponent RenderChart={RenderChart} ChartDataValues={ChartDataValues}
-                                        TickInterval={TickInterval}/>    
+                                        TickInterval={TickInterval} ChangeChartType={ChangeChartType}
+                                        ChartType={ChartType}/>    
             </div>
           </div>
 

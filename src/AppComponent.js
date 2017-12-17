@@ -37,6 +37,7 @@ class AppComponent extends Component {
       RenderChart:true,
       ShowChartHeadings:true,
       TickInterval:36,
+      ChartType: true,
 
       //All selection values and chart related data
       values:[],
@@ -50,6 +51,7 @@ class AppComponent extends Component {
     this.ScenarioSelectionClicked = this.ScenarioSelectionClicked.bind(this);
     this.TimePeriodSelectionClicked = this.TimePeriodSelectionClicked.bind(this);
     this.MultiChoiseItemClicked = this.MultiChoiseItemClicked.bind(this);
+    this.ChangeChartType = this.ChangeChartType.bind(this);
   }
 
   //Lifecycle methods
@@ -297,6 +299,10 @@ class AppComponent extends Component {
      }
   }
 
+  ChangeChartType(){
+    this.setState({ChartType: this.state.ChartType ? false : true });
+  }
+
   //Render
   render() {
     return (
@@ -307,6 +313,8 @@ class AppComponent extends Component {
           ShowChartHeadings = {this.state.ShowChartHeadings}
           ChartDataValues = {this.state.ChartDataValues}
           TickInterval = {this.state.TickInterval}
+          ChangeChartType = {this.ChangeChartType}
+          ChartType = {this.state.ChartType}
 
           AreaLevelValues = {this.state.AreaLevelValues}
           AreaLevelSelectionClicked={this.AreaLevelSelectionClicked}

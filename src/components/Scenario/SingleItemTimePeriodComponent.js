@@ -9,7 +9,7 @@ class SingleTimePeriodComponent extends Component {
 
         return (
             <div>
-               <div><a href="#" onClick={() => ItemSelectionClicked(TimePeriod,id)}>{TimePeriod}</a>  </div>
+               <div><a href="#" onClick={() => ItemSelectionClicked(TimePeriod,id)}>{TimePeriod}</a> </div>
             </div>
         )
     }

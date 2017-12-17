@@ -99,6 +99,8 @@ function getPolarConfig(ChartDataValues,tickInterval){
             chart: {
                 type: 'column',
                 backgroundColor:"transparent",
+                width: 520,
+                height:520,
             },
             title: {
                 text: ''
@@ -109,18 +111,20 @@ function getPolarConfig(ChartDataValues,tickInterval){
             xAxis: {
                 categories:category,
                 crosshair: true,
+                reversedStacks:true,
                 
             },
             yAxis: {
                 min: 0,
                 title: {
                     text: ''
-                }
+                },
+             
             },
             tooltip: {
                 headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                    '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                pointFormat: '<tr><td style="color:{series.color};padding:5">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
                 footerFormat: '</table>',
                 shared: true,
                 useHTML: true
@@ -129,6 +133,9 @@ function getPolarConfig(ChartDataValues,tickInterval){
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0
+                },
+                series: {
+                    stacking: 'normal'
                 }
             },
             series: [{
@@ -137,10 +144,11 @@ function getPolarConfig(ChartDataValues,tickInterval){
                     duration: 1500
                 },
                 type: 'column',
-                name:"Indikaattorin arvo",
+                name:"Valitut indikaattorit",
                 data: data,
                 pointPlacement: 'between',
-                color:"#04B431"
+                color:"#04B431",
+                showInLegend:false
             }],
 
             credits:false,

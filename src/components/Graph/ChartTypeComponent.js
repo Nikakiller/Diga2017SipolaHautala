@@ -4,36 +4,41 @@ class ChartTypeComponent extends Component {
 
     constructor(props){
         super(props)
+
         this.state={
-
-            resultPolar:"active",
-            resultColumns:"",
+            PolarView: "active",
+            ColumnView :""
         }
     }
 
-    ChartTypeClicked(){
+    PolarViewClicked(){
 
-        if(this.state.resultPolar!="active"){
-            
-            this.state.resultPolar ="active";
-            this.state.resultColumns="";
+        if(this.state.PolarView!="active"){
+            this.state.PolarView = "active";
+            this.state.ColumnView="";
+        }
+        
+        this.props.ChangeChartType()
+    }
 
-        }else{
+    ColumnViewClicked(){
 
-            this.state.resultPolar ="";
-            this.state.resultColumns="active";
+        if(this.state.ColumnView!="active"){
+
+            this.state.ColumnView = "active"
+            this.state.PolarView="";
         }
 
-        this.props.ChangeChartType();
+        this.props.ChangeChartType()
     }
-  
+
     render () {
 
         return (
             <div className="TypeContainer">
             <ul className="nav nav-pills">
-            <li className={this.state.resultPolar}><a href="#"onClick={()=>this.ChartTypeClicked()}>Polar</a></li>
-              <li className={this.state.resultColumn} onClick={()=>this.ChartTypeClicked()}><a href="#">Column</a></li>
+            <li className={this.state.PolarView}><a href="#"onClick={()=>this.PolarViewClicked()}>Polar</a></li>
+              <li className={this.state.ColumnView} ><a href="#" onClick={()=>this.ColumnViewClicked()}>Column</a></li>
             </ul>
           </div>
         )

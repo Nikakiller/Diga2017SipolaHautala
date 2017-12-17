@@ -300,7 +300,13 @@ class AppComponent extends Component {
   }
 
   ChangeChartType(){
-    this.setState({ChartType: this.state.ChartType ? false : true });
+
+    if(this.state.ChartType){
+      this.setState({ChartType:false})
+    } else{
+
+      this.setState({ChartType: true});
+    }
   }
 
   //Render

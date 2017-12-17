@@ -6,8 +6,8 @@ function getPolarConfig(ChartDataValues,tickInterval){
         chart: {
             polar: true,
             backgroundColor:"transparent",
-            height:500,
-            width:552,
+            height:450,
+            width:450,
             plotBorderWidth: null,
             margin: [0, 0, 0, 0],
             spacingTop: 0,
@@ -99,8 +99,8 @@ function getPolarConfig(ChartDataValues,tickInterval){
             chart: {
                 type: 'column',
                 backgroundColor:"transparent",
-                width: 520,
-                height:520,
+                width: 450,
+                height:450,
             },
             title: {
                 text: ''

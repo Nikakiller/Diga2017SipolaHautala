@@ -15,7 +15,7 @@ class GraphsContainerComponent extends Component {
     return (
       <div className="GraphsContainer">
       <GraphComponent ChartDataValues={ChartDataValues} TickInterval={TickInterval} ChartTypePolar={ChartType} />
-      <ChartTypeComponent ChangeChartType={ChangeChartType}/>
+      <ChartTypeComponent ChangeChartType={ChangeChartType} ChartType={ChartType}/>
       </div>
     );
   }

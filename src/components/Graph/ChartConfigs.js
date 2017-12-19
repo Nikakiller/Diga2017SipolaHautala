@@ -37,7 +37,6 @@ function getPolarConfig(ChartDataValues,tickInterval){
                 enabled:false
             },
             lineWidth: 0,
-            minorGridLineWidth: 0,
         },
     
         yAxis: {

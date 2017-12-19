@@ -76,8 +76,11 @@ class AppComponent extends Component {
 
      //Checking when component updates that is it time to render the chart
       if(this.state.ScenarioID !=="" && this.state.TimePeriodID!=="" && this.state.IndicatorID!==""){
+     
         this.chartDataHandler();
       }
+
+      console.log(this.state.ScenarioID+" "+this.state.TimePeriodID+" "+this.state.IndicatorID);
   }
 
   //Setting data not found fields
@@ -207,19 +210,21 @@ class AppComponent extends Component {
   TimePeriodSelectionClicked(TimePeriod, ID){
     let Time = this.state.TimePeriodDataValues;
     Time[1].timePeriodSelected = TimePeriod;
-    this.setState({TimePeriodDataValues:Time, TimePeriodID:ID});
-    this.state.ChartDataValues[0].ChartData = [];  
+    let Data = this.state.ChartDataValues;
+    Data[0].ChartData = [];
+    this.setState({TimePeriodDataValues:Time, TimePeriodID:ID,ChartDataValues:Data});  
   }
 
   MultiChoiseItemClicked(CallingID, ID, Name){
 
-        console.log(Name);
-
         switch(CallingID){
         case Defaults.ScenariosSelectionID:{
           console.log("Calling ID Scenario: ", ID);
-          //this.state.ChartDataValues[0].ChartData = [];
+          if(this.state.ScenarioID===""){
           this.setState({ScenarioID:ID});
+          }else{
+            //this.setState({ChartDataValues : [],ScearioID:""});
+          }
           break;
         }
         case Defaults.TreeID:{
@@ -270,7 +275,6 @@ class AppComponent extends Component {
               this.state.ChartDataValues[0].ChartData.push({type:"column",name:this.state.IndicatorSelected,y:this.state.values[i].value,color:"#04B431"});
               this.state.ChartDataValues[1].ChartDataID.push(this.state.IndicatorID);
               this.state.ChartDataValues[2].ChartDataIndicatorNames.push(this.state.IndicatorSelected);
-              this.setState({IndicatorID:""});
               break;
 
               } else {
@@ -282,8 +286,6 @@ class AppComponent extends Component {
                         this.state.ChartDataValues[1].ChartDataID.splice(l, 1);
                         this.state.ChartDataValues[0].ChartData.splice(l,1);
                         this.state.ChartDataValues[2].ChartDataIndicatorNames.splice(l,1);
-                        
-                        this.setState({IndicatorID:""});
                         addNewIndicator = false;
                         break;
                   } 
@@ -292,12 +294,13 @@ class AppComponent extends Component {
                         this.state.ChartDataValues[0].ChartData.push({type:"column",name:this.state.IndicatorSelected,y:this.state.values[i].value,color:"#04B431"});
                         this.state.ChartDataValues[1].ChartDataID.push(this.state.IndicatorID);
                         this.state.ChartDataValues[2].ChartDataIndicatorNames.push(this.state.IndicatorSelected);
-                        this.setState({IndicatorID:""});
                         break;
                        }
               }
          }
      }
+
+             this.setState({IndicatorID:""});
   }
 
   ChangeChartType(Type){

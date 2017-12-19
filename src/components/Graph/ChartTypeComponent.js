@@ -13,9 +13,8 @@ class ChartTypeComponent extends Component {
 
     PolarViewClicked(){
 
-        if(this.state.PolarView!="active"){
-            this.state.PolarView = "active";
-            this.state.ColumnView="";
+        if(this.state.PolarView!=="active"){
+            this.setState({PolarView:"active",ColumnView:""});
         }
         
         this.props.ChangeChartType(true)
@@ -23,10 +22,8 @@ class ChartTypeComponent extends Component {
 
     ColumnViewClicked(){
 
-        if(this.state.ColumnView!="active"){
-
-            this.state.ColumnView = "active"
-            this.state.PolarView="";
+        if(this.state.ColumnView!=="active"){
+            this.setState({PolarView:"",ColumnView:"active"});
         }
 
         this.props.ChangeChartType(false)
